@@ -1,0 +1,11 @@
+---
+__ldap_nslcd_uid: nslcd
+__ldap_nslcd_gid: ldap
+__ldap_debconf_utils_package: debconf-utils
+__ldap_ca_certs: /etc/ssl/certs/ca-bundle.crt
+__ldap_packages:
+  - nss-pam-ldapd
+  - nscd
+  - oddjob
+  - oddjob-mkhomedir 
+  - authconfig

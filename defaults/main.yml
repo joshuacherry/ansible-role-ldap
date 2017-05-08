@@ -1,0 +1,25 @@
+# defaults file for ansible-role-ldap
+---
+ldap_home_umask: "0022"
+
+ldap_uri: ldap://domain.fqdn
+ldap_base: DC=domain,DC=fqdn
+ldap_version: 3
+ldap_scope: sub
+ldap_bind_timelimit: 50
+ldap_search_timelimit: 50
+ldap_binddn: CN=service_account,OU=Users,DC=domain,DC=fqdn
+ldap_bindpw: "bindpassword-here"
+ldap_tls_reqcert: never
+ldap_pagesize: 1000
+ldap_referrals: yes
+ldap_idle_timelimit: 800
+ldap_filters: |
+  filter passwd (&(objectClass=user)(!(objectClass=computer)))
+  filter shadow (&(objectClass=user)(!(objectClass=computer)))
+  filter group (&(|(objectClass=group)(Objectclass=user))(!(objectClass=computer)))
+ldap_nslcd_extra_params: |
+  ssl start_tls
+  nss_initgroups_ignoreusers  root
+  ## Debugging
+  ##   sudo $(which nslcd) -d

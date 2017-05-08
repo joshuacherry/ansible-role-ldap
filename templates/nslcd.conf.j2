@@ -1,0 +1,46 @@
+# /etc/nslcd.conf
+# nslcd configuration file. See nslcd.conf(5)
+# for details.
+
+# The user and group nslcd should run as.
+uid {{ ldap_nslcd_uid }}
+gid {{ ldap_nslcd_gid }}
+
+# The location at which the LDAP server(s) should be reachable.
+uri {{ ldap_uri }}
+
+# The search base that will be used for all queries.
+base {{ ldap_base }}
+
+# The LDAP protocol version to use.
+ldap_version {{ ldap_version }}
+
+# Search Scope
+scope {{ ldap_scope }}
+
+# Bind timelimit
+bind_timelimit {{ ldap_bind_timelimit }}
+# Search timelimit.
+timelimit {{ ldap_search_timelimit }}
+
+# The DN to bind with for normal lookups.
+# defconf-set-selections doesn't seem to set this. so have to manually set this.
+binddn {{ ldap_binddn }}
+bindpw {{ ldap_bindpw }}
+
+# SSL options
+tls_reqcert {{ ldap_tls_reqcert }}
+tls_cacertfile {{ ldap_ca_certs }}
+
+# Mappings for Active Directory
+# (replace the SIDs in the objectSid mappings with the value for your domain)
+# "dsquery * -filter (samaccountname=testuser1) -attr ObjectSID" 
+pagesize {{ ldap_pagesize }}
+referrals {{ ldap_referrals }}
+idle_timelimit {{ ldap_idle_timelimit }}
+
+# Ref: http://msdn.microsoft.com/en-us/library/aa746475%28VS.85%29.aspx (LDAP_MATCHING_RULE_IN_CHAIN)
+
+{{ ldap_filters|indent(0) }}
+
+{{ ldap_nslcd_extra_params|indent(0) }}

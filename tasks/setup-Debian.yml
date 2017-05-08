@@ -1,0 +1,30 @@
+---
+- name: "LDAP Authentication | update package list"
+  apt:
+    update_cache: yes
+  changed_when: false
+
+#- include_tasks: initialize.yml
+
+- name: "LDAP Authentication | Ensure ldap packages are installed."
+  apt:
+    name: "{{ item }}"
+    state: installed
+  with_items: "{{ ldap_packages }}"
+
+- name: "LDAP Authentication | Ensure services are running"
+  service:
+    name={{item}}
+    enabled=yes
+    state=started
+  with_items:
+    - "nscd"
+    - "nslcd"
+  register: services_ldap
+
+- name: LDAP Authentication | Create Home Directories on login
+  lineinfile:
+    dest: /etc/pam.d/common-account
+    regexp: 'pam_mkhomedir\.so'
+    line: "session required pam_mkhomedir.so skel=/etc/skel/ umask={{ldap_home_umask}}"
+    state: present

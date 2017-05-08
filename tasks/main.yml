@@ -1,0 +1,32 @@
+# Tasks file for ansible-role-ldap
+---
+# Variable configuration.
+- include_tasks: variables.yml
+  static: no
+
+# Setup/install tasks.
+- include_tasks: setup-RedHat.yml
+  when: ansible_os_family == 'RedHat'
+  static: no
+
+- include_tasks: setup-Debian.yml
+  when: ansible_os_family == 'Debian'
+  static: no
+
+- name: LDAP Authentication | Query ldap in nsswitch.conf
+  replace:
+    dest: /etc/nsswitch.conf
+    regexp: '^({{ item }}(?!.*\bldap\b).*)$'
+    replace: '\1 ldap'
+    backup: yes
+  with_items:
+    - passwd
+    - shadow
+    - group
+
+- name: "LDAP Authentication | Configure /etc/nslcd.conf"
+  template:
+    src: nslcd.conf.j2
+    dest: /etc/nslcd.conf
+    mode: 0600
+  notify: restart services ldap

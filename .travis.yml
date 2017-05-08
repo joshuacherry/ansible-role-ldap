@@ -1,0 +1,22 @@
+---
+language: generic
+sudo: required
+services:
+  - docker
+env:
+  global:
+    # Travis still uses trusty
+    - DOCKER_VERSION=17.03.1~ce-0~ubuntu-trusty
+    - DOCKER_COMPOSE_VERSION=1.13.0
+  matrix:
+    - OS=jessie64 PLAYBOOK=tests
+    - OS=xenial64 PLAYBOOK=tests
+    - OS=centos7  PLAYBOOK=tests
+
+before_install:
+  - chmod +x ./scripts/install-docker.sh
+  - chmod +x ./scripts/ci.sh
+  - sudo -E ./scripts/install-docker.sh
+install: true
+script:
+  - make "${OS}" test

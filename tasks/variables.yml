@@ -1,0 +1,35 @@
+# Variables file for ansible-role-ldap
+---
+# Variable configuration.
+- name: Include OS-specific variables (Debian).
+  include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_version.split('.')[0] }}.yml"
+  when: ansible_os_family == 'Debian'
+
+- name: Include OS-specific variables (RedHat).
+  include_vars: "{{ ansible_os_family }}-{{ ansible_distribution_version.split('.')[0] }}.yml"
+  when: ansible_os_family == 'RedHat'
+
+- name: Define ldap_packages.
+  set_fact:
+    ldap_packages: "{{ __ldap_packages | list }}"
+  when: ldap_packages is not defined
+
+- name: Define ldap_debconf_utils_package.
+  set_fact:
+    ldap_debconf_utils_package: "{{ __ldap_debconf_utils_package }}"
+  when: ldap_debconf_utils_package is not defined
+
+- name: Define ldap_nslcd_uid.
+  set_fact:
+    ldap_nslcd_uid: "{{ __ldap_nslcd_uid }}"
+  when: ldap_nslcd_uid is not defined
+
+- name: Define ldap_nslcd_gid.
+  set_fact:
+    ldap_nslcd_gid: "{{ __ldap_nslcd_gid }}"
+  when: ldap_nslcd_gid is not defined
+
+- name: Define ldap_ca_certs.
+  set_fact:
+    ldap_ca_certs: "{{ __ldap_ca_certs }}"
+  when: ldap_ca_certs is not defined

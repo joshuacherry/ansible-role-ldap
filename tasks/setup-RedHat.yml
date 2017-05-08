@@ -1,0 +1,23 @@
+---
+#- include_tasks: initialize.yml
+
+- name: "LDAP Authentication | Ensure packages are installed."
+  yum:
+    name: "{{ item }}"
+    state: installed
+  with_items: "{{ ldap_packages }}"
+
+- name: "LDAP Authentication | Ensure services are running"
+  service:
+    name={{item}}
+    enabled=yes
+    state=started
+  with_items:
+    - "nscd"
+    - "nslcd"
+    - "oddjobd"
+  register: services_ldap
+
+- name: "LDAP Authentication | Enable LDAP PAM modules"
+  command: "authconfig --enableldap --enableldapauth --enablemkhomedir --update"
+  changed_when: false
