@@ -7,5 +7,5 @@ __ldap_packages:
   - nss-pam-ldapd
   - nscd
   - oddjob
-  - oddjob-mkhomedir 
+  - oddjob-mkhomedir
   - authconfig

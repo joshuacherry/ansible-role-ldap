@@ -1,10 +1,8 @@
 ---
-#- include_tasks: initialize.yml
-
-- name: "LDAP Authentication | Ensure packages are installed."
+- name: "LDAP Authentication | Ensure packages are present."
   yum:
     name: "{{ item }}"
-    state: installed
+    state: present
   with_items: "{{ ldap_packages }}"
 
 - name: "LDAP Authentication | Ensure services are running"

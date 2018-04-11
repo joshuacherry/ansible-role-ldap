@@ -1,8 +1,0 @@
----
-__ldap_nslcd_uid: nslcd
-__ldap_nslcd_gid: nslcd
-__ldap_debconf_utils_package: debconf-utils
-__ldap_ca_certs: /etc/ssl/certs/ca-certificates.crt
-__ldap_packages:
-  - libpam-ldapd
-  - nscd
