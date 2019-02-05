@@ -6,9 +6,8 @@
 
 - name: "LDAP Authentication | Ensure ldap packages are present."
   apt:
-    name: "{{ item }}"
+    name: "{{ ldap_packages }}"
     state: present
-  with_items: "{{ ldap_packages }}"
 
 - name: "LDAP Authentication | Ensure services are running"
   service:

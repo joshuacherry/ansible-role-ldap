@@ -16,9 +16,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-### Changed
+## [1.2.2] - 2019-02-05
 
 - Updated tests to use python3
+- Fixed Ansible deprecation for apt and yum
 
 ## [1.2.1] - 2018-05-09
 
@@ -43,6 +44,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - yaml syntax and linting issues
 
-[Unreleased]: https://github.com/joshuacherry/ansible-role-ldap/compare/1.2.1...HEAD
+[Unreleased]: https://github.com/joshuacherry/ansible-role-ldap/compare/1.2.2...HEAD
+[1.2.2]: https://github.com/joshuacherry/ansible-role-ldap/compare/1.2.1...1.2.2
 [1.2.1]: https://github.com/joshuacherry/ansible-role-ldap/compare/1.2.0...1.2.1
 [1.2.0]: https://github.com/joshuacherry/ansible-role-ldap/compare/1.0.1...1.2.0
