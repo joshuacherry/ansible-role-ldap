@@ -1,8 +1,29 @@
 ---
 language: python
 sudo: required
+dist: xenial
 services:
   - docker
+
+python:
+  - 3.7
+
+matrix:
+  fast_finish: true
+  include:
+    - { env: ANSIBLE=2.5 OS=ubuntu1604}
+    - { env: ANSIBLE=2.6 OS=ubuntu1604}
+    - { env: ANSIBLE=2.7 OS=ubuntu1604}
+
+    - { env: ANSIBLE=2.5 OS=ubuntu1804}
+    - { env: ANSIBLE=2.6 OS=ubuntu1804}
+    - { env: ANSIBLE=2.7 OS=ubuntu1804}
+
+    - { env: ANSIBLE=2.5 OS=centos7}
+    - { env: ANSIBLE=2.6 OS=centos7}
+    - { env: ANSIBLE=2.7 OS=centos7}
+
+
 before_install:
   - sudo apt-get -qq update
 install:

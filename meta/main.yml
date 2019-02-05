@@ -3,7 +3,7 @@ galaxy_info:
   author: Joshua Cherry
   description: Ansible playbook to install apache2.
   license: MIT
-  min_ansible_version: 2.4.3.0
+  min_ansible_version: 2.6
   platforms:
     - name: Ubuntu
       versions:
